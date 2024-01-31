@@ -1,0 +1,15 @@
+stages:
+  - test
+
+variables:
+  SBT_VERSION: "1.9.8"
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y openjdk-8-jdk curl
+  - curl -sL "https://github.com/sbt/sbt/releases/download/v${SBT_VERSION}/sbt-${SBT_VERSION}.tgz" | tar zx -C /usr/local
+
+test:
+  stage: test
+  script:
+    - /usr/local/sbt/bin/sbt test
